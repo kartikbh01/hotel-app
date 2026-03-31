@@ -1,0 +1,65 @@
+<app-home></app-home>
+
+<div class="container mt-5">
+
+  <div class="card shadow-sm p-4">
+
+    <h3 class="mb-4 text-center">Reservation List</h3>
+
+    <div *ngIf="reservations.length; else noReservation">
+
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center">
+
+          <thead class="table-dark">
+            <tr>
+              <th>Guest</th>
+              <th>Email</th>
+              <th>Room No.</th>
+              <th>Check-In</th>
+              <th>Check-Out</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let reservation of reservations">
+              <td class="fw-semibold">{{ reservation.guestName }}</td>
+              <td>{{ reservation.guestEmail }}</td>
+              <td>{{ reservation.roomNumber }}</td>
+              <td>{{ reservation.checkInDate }}</td>
+              <td>{{ reservation.checkOutDate }}</td>
+
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-danger me-2"
+                  (click)="deleteReservation(reservation.id)">
+                  Delete
+                </button>
+
+                <button
+                  [routerLink]="['/edit', reservation.id]"
+                  class="btn btn-sm btn-outline-secondary">
+                  Edit
+                </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+
+    <ng-template #noReservation>
+      <div class="text-center py-4">
+        <p class="text-muted mb-2">No reservations available.</p>
+        <a routerLink="/create" class="btn btn-primary btn-sm">
+          Create Reservation
+        </a>
+      </div>
+    </ng-template>
+
+  </div>
+
+</div>
